@@ -9,9 +9,11 @@ def home(request):
     order = request.GET.get('order')
 
     if order == 'name':
-        menu_list = Menu.objects.exclude(meals=None).annotate(Count('meals')).order_by('name')
+        menu_list = Menu.objects.exclude(meals=None) \
+                        .annotate(Count('meals')).order_by('name')
     elif order == 'meals':
-        menu_list = Menu.objects.exclude(meals=None).annotate(Count('meals')).order_by('meals__count')
+        menu_list = Menu.objects.exclude(meals=None) \
+                        .annotate(Count('meals')).order_by('meals__count')
     else:
         order = 'id'
         menu_list = Menu.objects.exclude(meals=None).annotate(Count('meals'))
