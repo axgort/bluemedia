@@ -8,5 +8,4 @@ class Meal(models.Model):
 
 class Menu(models.Model):
     name = models.CharField(max_length=50, unique=True)
-    meals = models.ManyToManyField(Meal)
-    size = models.IntegerField()
+    meals = models.ManyToManyField(Meal, blank=True)

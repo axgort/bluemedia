@@ -1,0 +1,27 @@
+{% for menu in menus %}
+    {{ menu.name }}<br />
+{% endfor %}
+
+<div class="orderBy">
+    <span class="order-links">
+        Order by:
+        <a href="?page=1&order=id">Id</a>
+        <a href="?page=1&order=name">Name</a>
+        <a href="?page=1&order=meals">Meals count</a>
+    </span>
+</div>
+<div class="pagination">
+    <span class="step-links">
+        {% if menus.has_previous %}
+        <a href="?page={{ menus.previous_page_number }}&order={{ order }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ menus.number }} of {{ menus.paginator.num_pages }}.
+        </span>
+
+        {% if menus.has_next %}
+            <a href="?page={{ menus.next_page_number }}&order={{ order }}">next</a>
+        {% endif %}
+    </span>
+</div>
