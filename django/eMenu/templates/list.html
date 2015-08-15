@@ -1,27 +1,69 @@
-{% for menu in menus %}
-    {{ menu.name }}<br />
-{% endfor %}
+{% extends "index.html" %}
 
-<div class="orderBy">
-    <span class="order-links">
-        Order by:
-        <a href="?page=1&order=id">Id</a>
-        <a href="?page=1&order=name">Name</a>
-        <a href="?page=1&order=meals">Meals count</a>
-    </span>
-</div>
-<div class="pagination">
-    <span class="step-links">
-        {% if menus.has_previous %}
-        <a href="?page={{ menus.previous_page_number }}&order={{ order }}">previous</a>
-        {% endif %}
+{% block title %}Menu list{% endblock %}
 
-        <span class="current">
-            Page {{ menus.number }} of {{ menus.paginator.num_pages }}.
+{% block content %}
+    <div class="orderBy">
+        <span class="order-links">
+            Order by:
+            <a class="btn btn-link" href="?page=1&order=id"
+                {% if order == 'id' %}
+                    disabled="disabled"
+                {% endif %}
+            >Id</a>
+            <a class="btn btn-link" href="?page=1&order=name"
+                {% if order == 'name' %}
+                    disabled="disabled"
+                {% endif %}
+            >Name</a>
+            <a class="btn btn-link" href="?page=1&order=meals"
+                {% if order == 'meals' %}
+                    disabled="disabled"
+                {% endif %}
+            >Meals count</a>
         </span>
+    </div>
+    <br />
 
-        {% if menus.has_next %}
-            <a href="?page={{ menus.next_page_number }}&order={{ order }}">next</a>
-        {% endif %}
-    </span>
-</div>
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Meals</th>
+            <th>Options</th>
+        </tr>
+        {% for menu in menus %}
+            <tr>
+                <td>{{ menu.id }}</td>
+                <td>{{ menu.name }}</td>
+                <td>{{ menu.meals__count }}</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="menu/{{ menu.id }}">
+                        details
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if menus.has_previous %}
+                <a class="btn btn-default btn-sm" href="?page={{ menus.previous_page_number }}&order={{ order }}">
+                    previous
+                </a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ menus.number }} of {{ menus.paginator.num_pages }}.
+            </span>
+
+            {% if menus.has_next %}
+                <a class="btn btn-default btn-sm" href="?page={{ menus.next_page_number }}&order={{ order }}">
+                    next
+                </a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}
+

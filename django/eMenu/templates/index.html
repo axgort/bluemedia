@@ -1,0 +1,16 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <link href="{% static bootstrap.min.css %}bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            {% block content %}{% endblock %}
+            <footer>
+                <a href="{% url 'error' %}">Report error</a>
+            </footer>
+        </div>
+    </body>
+</html>

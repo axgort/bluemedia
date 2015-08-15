@@ -1,8 +1,12 @@
 from django.shortcuts import render_to_response
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count
+from django.http import Http404
+from django.template.context_processors import csrf
+from django.shortcuts import redirect
 
-from .models import Menu
+from .models import Menu, Meal
+from .forms import ErrorForm
 
 
 def home(request):
@@ -31,5 +35,27 @@ def home(request):
     return render_to_response('list.html', {'menus': menus, 'order': order})
 
 
-def menu(request):
-    pass
+def menu(request, id):
+    try:
+        menu = Menu.objects.get(pk=id)
+        meals = Meal.objects.filter(menu=menu)
+    except:
+        raise Http404()
+
+    return render_to_response('details.html', {'menu': menu, 'meals': meals})
+
+
+def error(request):
+    if request.POST:
+        form = ErrorForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = ErrorForm()
+
+    context = {'form': form}
+    context.update(csrf(request))
+
+    return render_to_response('error.html', context)

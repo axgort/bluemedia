@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+
+{% block title %}Bugs{% endblock %}
+
+{% block content %}
+    <form action="." method="POST">
+        <table class="table table-bordered">
+            {{ form }}
+        </table>
+        {% csrf_token %}
+        <input type="submit" value="Send" />
+    </form>
+{% endblock %}

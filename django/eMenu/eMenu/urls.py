@@ -19,6 +19,9 @@ from django.contrib import admin
 from menuList import views
 
 urlpatterns = [
-    url(r'^$', views.home),
+    url(r'^$', views.home, name='home'),
+    url(r'^error/$', views.error, name='error'),
+    url(r'^menu/(?P<id>\d+)/$', views.menu, name='menu'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^captcha/', include('captcha.urls')),
 ]
