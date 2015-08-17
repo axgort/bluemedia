@@ -6,7 +6,7 @@ Installation:
 * To create database run command `python manage.py migrate` 
 * To load data run command `python manage.py loaddata eMenu/fixtures/initial_data.json`
 
-To application:
+To run application:
 * Go to django/eMenu/ directory
 * To start run command `python manage.py runserver`
 * Open web browser on go to http://localhost:8000/
@@ -92,17 +92,17 @@ print output
 In both cases output is: 
 i"hope"you"didnt"tr{nsl{te"it"|y"h{nd0
 
-For every character in string. If this char isn't digit. Add 2 to decimal ASCII representation and return to character. Add new generated character to output. 
+For every character in string. If it isn't digit. Add 2 to its decimal ASCII representation and return to character. Add new generated character to output. 
 
-Egzample:
-g isn't digit so we add to it's decimal ASCII representation 2 (103 + 2 = 105)
+### Egzample: ###
+g isn't digit so we add to its decimal ASCII representation 2 (103 + 2 = 105)
 105 is a letter 'i' in ASCII so we add 'i' to output.
 
 6 is digit so we omit it.
 
 5 is digit so we omit it.
 
-' ' isn't digit so we add to it's decimal ASCII representation 2 (32 + 2 = 34)
-34 is a '"' char in ASCII so we add '"' to output.
+Space character isn't digit so we add to its decimal ASCII representation 2 (32 + 2 = 34)
+34 is a '"' character in ASCII so we add '"' to output.
 
 
